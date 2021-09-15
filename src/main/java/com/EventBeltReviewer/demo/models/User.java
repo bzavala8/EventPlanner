@@ -7,7 +7,10 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.PrePersist;
+import javax.persistence.PreUpdate;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.Size;
 
@@ -27,6 +30,7 @@ public class User {
     
     
     private String password;
+    @Transient
     private String confirmPassword;
     
     @Column(updatable=false)
@@ -69,4 +73,12 @@ public class User {
 	public void setPassword(String password) {
 		this.password = password;
 	}
+	 @PrePersist
+    protected void onCreate(){
+        this.createdAt = new Date();
+    }
+    @PreUpdate
+    protected void onUpdate(){
+        this.updatedAt = new Date();
+    }
 }
