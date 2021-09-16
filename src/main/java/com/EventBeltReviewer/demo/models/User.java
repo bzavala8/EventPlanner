@@ -24,7 +24,8 @@ public class User {
     private String firstName;
     @Size(min = 2)
     private String lastName;
-    private String location;
+    private String city;
+    private String state;
     @Email
     private String email;
     
@@ -55,12 +56,6 @@ public class User {
 	public void setLastName(String lastName) {
 		this.lastName = lastName;
 	}
-	public String getLocation() {
-		return location;
-	}
-	public void setLocation(String location) {
-		this.location = location;
-	}
 	public String getEmail() {
 		return email;
 	}
@@ -81,4 +76,16 @@ public class User {
     protected void onUpdate(){
         this.updatedAt = new Date();
     }
+	public String getCity() {
+		return city;
+	}
+	public void setCity(String city) {
+		this.city = city;
+	}
+	public String getState() {
+		return state;
+	}
+	public void setState(String state) {
+		this.state = state;
+	}
 }

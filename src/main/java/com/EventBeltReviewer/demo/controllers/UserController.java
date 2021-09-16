@@ -45,7 +45,7 @@ public class UserController {
 		session.setAttribute("userId", user.getId());
 		
 		redirectAttributes.addFlashAttribute("messages", new ArrayList<String>(Arrays.asList("Welcome Back!")));
-		return "redirect:/";
+		return "redirect:/events/dashboard";
 	}
 	
 	@GetMapping("/logout")

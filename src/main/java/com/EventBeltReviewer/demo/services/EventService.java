@@ -21,6 +21,15 @@ public class EventService {
 		return this.repository.findAll();
 	}
 	
+	public List<?> eventsInState(String state){
+		
+		return this.repository.findByState(state);
+	}
+	
+	public List<?> eventsNotInState(String state){
+		return this.repository.findByNotInState(state);
+	}
+	
 	public Event create(Event newEntity) {
 		return this.repository.save(newEntity);
 	}
@@ -43,10 +52,11 @@ public class EventService {
 		Event entity = this.findById(id);
 		
 		if( entity != null ) {
-//			entity.setTitle(entityUpdates.getTitle());
-//			entity.setDescription(entityUpdates.getDescription());
-//			entity.setLanguage(entityUpdates.getLanguage());
-//			entity.setNumberOfPages(entityUpdates.getNumberOfPages());
+			entity.setHost(entityUpdates.getHost());
+			entity.setName(entityUpdates.getName());
+			entity.setDate(entityUpdates.getDate());
+			entity.setCity(entityUpdates.getCity());
+			entity.setState(entityUpdates.getState());
 			this.save(entity);
 			return true;
 		}

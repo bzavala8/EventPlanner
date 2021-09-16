@@ -23,7 +23,8 @@ public class Event {
     @Size(min = 2)
     private String name;
     private Date date;
-    private String location;
+    private String city;
+    private String state;
     
     @Column(updatable=false)
     private Date createdAt;
@@ -52,12 +53,7 @@ public class Event {
 	public void setDate(Date date) {
 		this.date = date;
 	}
-	public String getLocation() {
-		return location;
-	}
-	public void setLocation(String location) {
-		this.location = location;
-	}
+	
     @PrePersist
     protected void onCreate(){
         this.createdAt = new Date();
@@ -66,4 +62,16 @@ public class Event {
     protected void onUpdate(){
         this.updatedAt = new Date();
     }
+	public String getCity() {
+		return city;
+	}
+	public void setCity(String city) {
+		this.city = city;
+	}
+	public String getState() {
+		return state;
+	}
+	public void setState(String state) {
+		this.state = state;
+	}
 }
