@@ -1,17 +1,21 @@
 package com.EventBeltReviewer.demo.controllers;
 
 import javax.servlet.http.HttpSession;
+import javax.validation.Valid;
 
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.EventBeltReviewer.demo.services.EventService;
 import com.EventBeltReviewer.demo.services.UserService;
+import com.EventBeltReviewer.demo.models.Event;
 import com.EventBeltReviewer.demo.models.User;
 
 
@@ -44,8 +48,13 @@ public class EventController {
 	}
 	
 	@PostMapping("/dashboard")
-	public String newEvent(@RequestParam(value="name") String name) {
-		return "random";
+	public String newEvent(@Valid @ModelAttribute("event") Event event, BindingResult result) {
+		if(result.hasErrors()) {
+			return "index.jsp";
+		}else {
+			this.service.create(event);
+			return "redirect:/events/dashboard";
+		}
 	}
 
 }
